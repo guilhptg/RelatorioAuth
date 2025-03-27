@@ -1,21 +1,26 @@
 import streamlit as st
 import pandas as pd
 import streamlit_authenticator as stauth
+from models import session, Usuario
+from criar_admin import senha_admin_criptografada
 
+lista_usuarios = session.query(Usuario).all()
 
-senhas_criptografadas = stauth.Hasher(['123123', '123123', '3125433']).generate()
+credenciais = {"usernames": 
+                {
+                    usuario.email: 
+                    {'name': usuario.nome, 
+                    'password': usuario.senha} for usuario in lista_usuarios
+                    }
+                }
 
-credenciais = {"usernames": {
-    "sinteses@gmail.com": {"name": "Sinteses", "password": senhas_criptografadas[0]},
-    "gui@gmail.com": {"name": "Gui", "password": senhas_criptografadas[1] },
-    "anna@gmail.com": {"name": "Anna", "password": senhas_criptografadas[2] },
-}}
+authenticator = stauth.Authenticate(credenciais, 'credenciais_hashco', senha_admin_criptografada, cookie_expiry_days=30)
 
-authenticator = stauth.Authenticate(credenciais, 'credenciais_hashco', 'sadasfafshsakldjhaskjdha', cookie_expiry_days=30)
-
+print(credenciais)
 # login
 def autenticar_usuario(authenticator):
     nome, authentication_status, username = authenticator.login()
+
     if authentication_status:
         return {'nome': nome, 'username': username}
     elif authentication_status == False:
@@ -23,9 +28,7 @@ def autenticar_usuario(authenticator):
     else:
         st.error('Preencha o formulário para fazer login')
 
-
-
-def logout(authenticator):
+def logout():
     authenticator.logout()
 
 
@@ -38,10 +41,32 @@ if dados_usuario:
         tabela = pd.read_excel("Base.xlsx")
         return tabela
 
+    base = carregar_dados()
+
+    # Inicio
+    # Dashboards
+    # Indicadores
+    email_usuario = dados_usuario['username']
+    usuario = session.query(Usuario).filter_by(email=email_usuario).first()
+
+
+    if usuario.admin:
+        pg = st.navigation(
+            {
+                'Home': [st.Page('homepage.py', title='Sinteses - Analytc',)], # função ou arquivo
+                'Dashboard': [st.Page('dashboard.py', title='Dashboard'), st.Page('indicadores.py', title='Indicadores')],
+                'Conta': [st.Page(logout, title='Sair'), st.Page('criar_conta.py', title='Criar Conta')]
+            }
+        )
+    else:
+        pg = st.navigation(
+            {
+                'Home': [st.Page('homepage.py', title='Sinteses - Analtyc',)], # função ou arquivo
+                'Dashboard': [st.Page('dashboard.py', title='Dashboard'), st.Page('indicadores.py', title='Indicadores')],
+                'Conta': [st.Page(logout, title='Sair')]
+            }
+        )
 
     base = carregar_dados()
 
-    st.title('Sinteses - Análise')
-    st.write('Bem vindo, Fulano')
-    st.table(base.head(10))
-
+    pg.run()
