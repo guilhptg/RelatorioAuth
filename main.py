@@ -36,12 +36,6 @@ dados_usuario = autenticar_usuario(authenticator=authenticator)
 
 
 if dados_usuario:
-    @st.cache_data
-    def carregar_dados():
-        tabela = pd.read_excel("Base.xlsx")
-        return tabela
-
-    base = carregar_dados()
 
     # Inicio
     # Dashboards
@@ -67,6 +61,5 @@ if dados_usuario:
             }
         )
 
-    base = carregar_dados()
 
     pg.run()
