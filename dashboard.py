@@ -28,8 +28,18 @@ with container:
 
     # Grafico de área
     st.title('Total Projetos por mes (R$)')
-    fig_area = px.area(base_mensal, x='Data Chegada', y='Valor Negociado')
+    fig_area = px.area(
+        base_mensal, 
+        x='Data Chegada', 
+        y='Valor Negociado', 
+        )
+
+    fig_area.update_traces(
+        line=dict(color='purple'),  # Cor da linha
+        fillcolor='rgba(128, 0, 128, 0.3)'  # Roxo com transparência
+    )
+
     st.plotly_chart(fig_area)
 
 
-    st.table(base.head(20))
+    st.table(base.head(10))
