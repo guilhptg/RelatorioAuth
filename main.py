@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import streamlit_authenticator as stauth
 from models import session, Usuario
-from criar_admin import senha_admin_criptografada
+
 
 lista_usuarios = session.query(Usuario).all()
 
