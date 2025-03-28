@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit_authenticator as stauth
 from models import session, Usuario
 
+st.set_page_config(layout='wide')
 
 lista_usuarios = session.query(Usuario).all()
 
@@ -14,7 +15,13 @@ credenciais = {"usernames":
                     }
                 }
 
-authenticator = stauth.Authenticate(credenciais, 'credenciais_hashco', '$2b$12$uYNnEjFoSNqewEJ6S0aAFOO0sSngbGxGdyZ4lDJoTwOPRFZrDMwei', cookie_expiry_days=30)
+# Lendo as credenciais do admin do arquivo secrets.toml
+admin_username = st.secrets["admin"]["username"]
+admin_password = st.secrets["admin"]["password"]
+
+
+
+authenticator = stauth.Authenticate(credenciais, 'credenciais_hashco', admin_password, cookie_expiry_days=30)
 
 print(credenciais)
 # login
