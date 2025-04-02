@@ -9,6 +9,7 @@ base = carregar_dados()
 # Criar indicadores - PD
 
 base_emandamento = base[base["Status"] == "Em andamento"]
+# Filtro para dados .isin
 base_fechados = base[base["Status"].isin(["Em andamento", "Finalizado"])]
 
 

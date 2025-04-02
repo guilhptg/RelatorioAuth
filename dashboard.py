@@ -27,7 +27,7 @@ container = st.container(border=True)
 with container:
 
     # Grafico de área
-    st.title('Total Projetos por mes (R$)')
+    st.write('### Total Projetos por mes (R$)')
     fig_area = px.area(
         base_mensal, 
         x='Data Chegada', 
@@ -38,8 +38,36 @@ with container:
         line=dict(color='purple'),  # Cor da linha
         fillcolor='rgba(128, 0, 128, 0.3)'  # Roxo com transparência
     )
-
+    # Grafico pronto
     st.plotly_chart(fig_area)
 
+    col_left, col_rigth = st.columns([3, 1])
+    st.write('### Comparação Orçado (R$)')
 
-    st.table(base.head(10))
+    base_mensal['Ano'] = base_mensal['Data Chegada'].dt.year
+    lista_anos = list(base_mensal['Ano'].unique())
+    ano_selecionado = col_rigth.selectbox('Ano', lista_anos)
+
+
+    base_mensal - base_mensal[base_mensal['Ano'] == ano_selecionado]
+    total_pago = base_mensal['Valor Negociado'].sum()
+    total_desconto = base_mensal['Desconto Concedido'].sum()
+
+    # Métricas
+    col_left, col_rigth = st.columns([1, 1])
+    col_left.metric('Total Pago', f'{total_pago:,.2f}')
+    col_rigth.metric('Total Desconto', f'{total_desconto:,.2f}')
+
+    # Grafico de Barras 
+    import plotly.graph_objects as go
+
+    grafico_barra = go.Figure(
+        go.Bar(name='Valor Orçado', x=base_mensal['Data Chegada'], y=base_mensal['Valor Orçado'], text=base_mensal['Valor Orçado']),
+        go.Bar(name='Valor Pago', x=base_mensal['Data Chegada'], y=base_mensal['Valor Negociado'], text=base_mensal['Valor Negociado']),
+    )
+    
+    grafico_barra.update_layout(barmode="group")
+
+
+    st.plotly_chart(grafico_barra)
+    # st.table(base.head(10))
