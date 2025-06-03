@@ -21,7 +21,7 @@ credenciais = {"usernames":
 
 
 
-authenticator = stauth.Authenticate(credenciais, 'credenciais_hashco', admin_password, cookie_expiry_days=30)
+authenticator = stauth.Authenticate(credenciais, 'credenciais_hashco', cookie_expiry_days=30)
 
 print(credenciais)
 # login
