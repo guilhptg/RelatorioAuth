@@ -7,6 +7,7 @@ st.set_page_config(layout='wide')
 
 # lista_usuarios = session.query(Usuario).all()
 
+
 # credenciais = {"usernames": 
 #                 {
 #                     usuario.email: 
