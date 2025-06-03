@@ -61,9 +61,10 @@ with container:
     # Grafico de Barras 
     import plotly.graph_objects as go
 
-    grafico_barra = go.Figure(
+    grafico_barra = go.Figure(data=[   
         go.Bar(name='Valor Orçado', x=base_mensal['Data Chegada'], y=base_mensal['Valor Orçado'], text=base_mensal['Valor Orçado']),
         go.Bar(name='Valor Pago', x=base_mensal['Data Chegada'], y=base_mensal['Valor Negociado'], text=base_mensal['Valor Negociado']),
+    ]
     )
     
     grafico_barra.update_layout(barmode="group")
