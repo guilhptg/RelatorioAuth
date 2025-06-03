@@ -42,6 +42,15 @@ def logout():
 dados_usuario = autenticar_usuario(authenticator=authenticator)
 
 
+pg = st.navigation(
+    {
+        'Home': [st.Page('homepage.py', title='Sinteses - Analytc',)], # função ou arquivo
+        'Dashboard': [st.Page('dashboard.py', title='Dashboard'), st.Page('indicadores.py', title='Indicadores')],
+        # 'Conta': [st.Page(logout, title='Sair'), st.Page('criar_conta.py', title='Criar Conta')]
+    }
+)
+
+
 if dados_usuario:
 
     # Inicio
@@ -70,3 +79,5 @@ if dados_usuario:
 
 
     pg.run()
+
+pg.run()
