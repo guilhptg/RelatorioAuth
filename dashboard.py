@@ -48,7 +48,7 @@ with container:
     lista_anos = list(base_mensal['Ano'].unique(), base_mensal['Ano'])
     
     # Métricas
-    col_left, col_rigth, ano_selecionado = st.columns([1, 1])
+    col_left, col_rigth, ano_selecionado = st.columns([1, 1, 1])
 
     ano_selecionado = col_rigth.selectbox('Ano', lista_anos)
 
