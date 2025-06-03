@@ -16,8 +16,8 @@ credenciais = {"usernames":
                 }
 
 # Lendo as credenciais do admin do arquivo secrets.toml
-admin_username = st.secrets["admin"]["username"]
-admin_password = st.secrets["admin"]["password"]
+# admin_username = st.secrets["admin"]["username"]
+# admin_password = st.secrets["admin"]["password"]
 
 
 
