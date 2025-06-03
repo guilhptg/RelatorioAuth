@@ -45,7 +45,7 @@ with container:
     st.write('### Comparação Valor Orçado (R$)')
 
     base_mensal['Ano'] = base_mensal['Data Chegada'].dt.year
-    lista_anos = list(base_mensal['Ano'].unique())
+    lista_anos = list(base_mensal['Ano'].unique(), base_mensal['Ano'])
     
     ano_selecionado = col_rigth.selectbox('Ano', lista_anos)
 
