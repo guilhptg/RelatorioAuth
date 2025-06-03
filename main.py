@@ -27,7 +27,7 @@ print(credenciais)
 # login
 def autenticar_usuario(authenticator):
     nome, authentication_status, username = authenticator.login()
-
+    
     if authentication_status:
         return {'nome': nome, 'username': username}
     elif authentication_status == False:
@@ -51,33 +51,33 @@ pg = st.navigation(
 )
 
 
-if dados_usuario:
+# if dados_usuario:
 
-    # Inicio
-    # Dashboards
-    # Indicadores
-    email_usuario = dados_usuario['username']
-    usuario = session.query(Usuario).filter_by(email=email_usuario).first()
-
-
-    if usuario.admin:
-        pg = st.navigation(
-            {
-                'Home': [st.Page('homepage.py', title='Sinteses - Analytc',)], # função ou arquivo
-                'Dashboard': [st.Page('dashboard.py', title='Dashboard'), st.Page('indicadores.py', title='Indicadores')],
-                'Conta': [st.Page(logout, title='Sair'), st.Page('criar_conta.py', title='Criar Conta')]
-            }
-        )
-    else:
-        pg = st.navigation(
-            {
-                'Home': [st.Page('homepage.py', title='Sinteses - Analtyc',)], # função ou arquivo
-                'Dashboard': [st.Page('dashboard.py', title='Dashboard'), st.Page('indicadores.py', title='Indicadores')],
-                'Conta': [st.Page(logout, title='Sair')]
-            }
-        )
+#     # Inicio
+#     # Dashboards
+#     # Indicadores
+#     email_usuario = dados_usuario['username']
+#     usuario = session.query(Usuario).filter_by(email=email_usuario).first()
 
 
-    pg.run()
+#     if usuario.admin:
+#         pg = st.navigation(
+#             {
+#                 'Home': [st.Page('homepage.py', title='Sinteses - Analytc',)], # função ou arquivo
+#                 'Dashboard': [st.Page('dashboard.py', title='Dashboard'), st.Page('indicadores.py', title='Indicadores')],
+#                 'Conta': [st.Page(logout, title='Sair'), st.Page('criar_conta.py', title='Criar Conta')]
+#             }
+#         )
+#     else:
+#         pg = st.navigation(
+#             {
+#                 'Home': [st.Page('homepage.py', title='Sinteses - Analtyc',)], # função ou arquivo
+#                 'Dashboard': [st.Page('dashboard.py', title='Dashboard'), st.Page('indicadores.py', title='Indicadores')],
+#                 'Conta': [st.Page(logout, title='Sair')]
+#             }
+#         )
+
+
+#     pg.run()
 
 pg.run()

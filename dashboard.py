@@ -41,15 +41,15 @@ with container:
     # Grafico pronto
     st.plotly_chart(fig_area)
 
-    col_left, col_rigth = st.columns([3, 1])
-    st.write('### Comparação Orçado (R$)')
+    col_left, col_mid, col_rigth = st.columns([3, 1])
+    st.write('### Comparação Valor Orçado (R$)')
 
     base_mensal['Ano'] = base_mensal['Data Chegada'].dt.year
     lista_anos = list(base_mensal['Ano'].unique())
+    
     ano_selecionado = col_rigth.selectbox('Ano', lista_anos)
 
-
-    base_mensal - base_mensal[base_mensal['Ano'] == ano_selecionado]
+    base_mensal = base_mensal[base_mensal['Ano'] == ano_selecionado]
     total_pago = base_mensal['Valor Negociado'].sum()
     total_desconto = base_mensal['Desconto Concedido'].sum()
 

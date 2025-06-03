@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: analise-corporativa-contratos
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    command: streamlit run main.py --server.ebableCORS=false --server.enableXsrfProtection=false
