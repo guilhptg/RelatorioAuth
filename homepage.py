@@ -8,11 +8,11 @@ col1, col2 = st.columns([3, 4]) # divisão proporcional
 
 with col1:
     st.title('Sinteses Analytcs')
-    st.write(f'#### Bem vindo')
+    st.write(f'#### Bem vindo \nAnálise realizada pela Sinteses Analytcs')
 
 
-    botao_dashboards = col1.button('Dashboard Projetos')
-    botao_indicadores = col1.button('Principais indicadores')
+    botao_dashboards = col1.button('Dashboard - Projetos')
+    botao_indicadores = col1.button('Principais Indicadores')
 
     if botao_dashboards:
         st.switch_page('dashboard.py')
