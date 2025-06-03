@@ -50,7 +50,7 @@ with container:
     col_left, col_rigth, box = st.columns([1, 1, 1])
     
     box = col_rigth.selectbox('Ano', lista_anos)
-    ano_selecionado = box.get()
+    ano_selecionado = box
 
 
     base_mensal = base_mensal[base_mensal['Ano'] == ano_selecionado]
