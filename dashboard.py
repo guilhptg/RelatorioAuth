@@ -47,15 +47,17 @@ with container:
     base_mensal['Ano'] = base_mensal['Data Chegada'].dt.year
     lista_anos = list(base_mensal['Ano'].unique(), base_mensal['Ano'])
     
-    # Métricas
-    col_left, col_rigth, ano_selecionado = st.columns([1, 1, 1])
+    col_left, col_rigth, box = st.columns([1, 1, 1])
+    
+    box = col_rigth.selectbox('Ano', lista_anos)
+    ano_selecionado = box.get()
 
-    ano_selecionado = col_rigth.selectbox('Ano', lista_anos)
 
     base_mensal = base_mensal[base_mensal['Ano'] == ano_selecionado]
     total_pago = base_mensal['Valor Negociado'].sum()
     total_desconto = base_mensal['Desconto Concedido'].sum()
 
+    # Métricas
     col_left.metric('Total Pago', f'{total_pago:,.2f}')
     col_rigth.metric('Total Desconto', f'{total_desconto:,.2f}')
 
