@@ -8,7 +8,7 @@ col1, col2 = st.columns([3, 4]) # divisão proporcional
 
 with col1:
     st.title('Sinteses Analytcs')
-    st.write(f'#### Bem vindo \nAnálise de contratos de projetos da empresa, realizada pela Sinteses Analytcs')
+    st.write(f'#### Bem vindo \nEsta é uma análise dos contratos de projetos referentes ao período de 2016 a 2019, realizada pela Sinteses Analytics')
 
 
     botao_dashboards = col1.button('Dashboard - Projetos')
